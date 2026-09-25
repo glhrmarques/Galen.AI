@@ -139,9 +139,17 @@ export default function SessionPage() {
           {hasRecorded && <div className="-mx-10 flex shrink-0 items-center justify-between gap-4 border-t border-[#dfdfdf] bg-white px-10 py-3 max-md:-mx-6 max-md:px-6 max-sm:flex-wrap">
               <div className="flex items-center gap-2">
                 {isRecording ? (
-                  <button type="button" aria-label={`Stop recording, ${timerLabel} elapsed`} onClick={stopRecording} className="flex h-10 w-[195px] items-center justify-between gap-2 rounded-lg bg-[#b84d4d] px-3 text-sm font-medium text-white hover:bg-[#a43e3e]">
-                    <span role="timer" aria-live="off">{timerLabel}</span><Icon name="stop-recording" width={16} height={16} />
-                  </button>
+                  <div className="flex items-center gap-3">
+                    <button type="button" aria-label={`Stop recording, ${timerLabel} elapsed`} onClick={stopRecording} className="flex h-10 w-[195px] items-center justify-between gap-2 rounded-lg bg-[#b84d4d] px-3 text-sm font-medium text-white hover:bg-[#a43e3e]">
+                      <span role="timer" aria-live="off">{timerLabel}</span>
+                      <div className="recording-waveform is-active" aria-hidden="true">
+                        {[10, 18, 13, 25, 16, 31, 20, 12, 23, 15, 28, 18, 11, 22, 14, 30, 19, 12, 25, 16, 10, 21, 14, 27].map((height, index) => (
+                          <span key={index} style={{ height, animationDelay: `${(index % 12) * -0.11}s` }} />
+                        ))}
+                      </div>
+                      <Icon name="stop-recording" width={16} height={16} />
+                    </button>
+                  </div>
                 ) : (
                   <button type="button" onClick={resumeRecording} className="flex h-10 w-[195px] items-center justify-between gap-2 rounded-lg border border-[#dfdfdf] bg-white px-3 text-sm font-medium text-black hover:bg-[#f8f8f8]">
                     <span>Resume transcribing</span><Icon name="resume-transcribing" width={16} height={16} />

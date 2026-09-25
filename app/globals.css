@@ -19,6 +19,29 @@ button:focus-visible { outline: 2px solid #777bcc; outline-offset: 4px; }
 .assistant-button { background: linear-gradient(180deg, #a2a5f3 41.071%, #000 221.43%); }
 .assistant-button:hover { filter: brightness(1.08); }
 
+.recording-waveform {
+  display: flex;
+  height: 32px;
+  align-items: center;
+  gap: 1px;
+  overflow: hidden;
+}
+.recording-waveform span {
+  width: 1px;
+  flex: 0 0 1px;
+  border-radius: 999px;
+  background: #fff;
+  transform: scaleY(.45);
+  opacity: .62;
+}
+.recording-waveform.is-active span {
+  animation: recording-wave 850ms ease-in-out infinite alternate;
+}
+@keyframes recording-wave {
+  from { transform: scaleY(.38); opacity: .55; }
+  to { transform: scaleY(1); opacity: 1; }
+}
+
 @keyframes ai-status-fade {
   0% { opacity: .5; transform: translateY(2px); }
   18%, 82% { opacity: 1; transform: translateY(0); }
@@ -44,4 +67,5 @@ button:focus-visible { outline: 2px solid #777bcc; outline-offset: 4px; }
   .ai-status-text { animation: none; }
   .procedure-block { animation: none; }
   .transcript-cursor { animation: none; }
+  .recording-waveform.is-active span { animation: none; transform: scaleY(.72); opacity: .9; }
 }
